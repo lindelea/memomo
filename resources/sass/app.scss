@@ -7,6 +7,9 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+// Landing-screens
+@import 'landing-screens/auth';
+
 // Customize
 @import 'components/cards';
 @import 'components/modals';
