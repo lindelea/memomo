@@ -22,6 +22,13 @@ class Memo extends Model
     protected $hidden = ['id'];
 
     /**
+     * The accessors to append to the model's array form.
+     *
+     * @var array
+     */
+    protected $appends = ['updated_at_for_human'];
+
+    /**
      * User
      * 1対1
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
@@ -29,5 +36,14 @@ class Memo extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * 人のために更新時間
+     * @return string
+     */
+    public function getUpdatedAtForHumanAttribute()
+    {
+        return $this->attributes['updated_at_for_human'] = $this->updated_at->diffForHumans();
     }
 }
