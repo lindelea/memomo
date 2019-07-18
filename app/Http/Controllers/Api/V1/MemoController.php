@@ -31,4 +31,36 @@ class MemoController extends Controller
         $memo->load(['user']);
         return new MemoResource($memo);
     }
+
+    /**
+     * メモつ追加API
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * @throws \Illuminate\Validation\ValidationException
+     */
+    public function store(Request $request)
+    {
+        $this->validate($request, [
+            'title' => 'required|string|min:1|max:50',
+            'content' => 'required|string',
+            'image' => 'image',
+        ]);
+        
+        $memo = new Memo();
+        
+        if ($request->hasFile('image')) {
+            $path = $request->image->store('images', 'public');
+            $memo->image_path = $path;
+        }
+        
+        $memo->title = $request->input('title');
+        $memo->content = $request->input('content');
+        $memo->user_id = $request->user()->id;
+        
+        $memo->save();
+        
+        return (new MemoResource($memo))
+            ->response()
+            ->setStatusCode(201);
+    }
 }
