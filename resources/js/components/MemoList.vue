@@ -29,6 +29,9 @@
                     .catch((error) => {
                         console.log(error);
                     });
+            },
+            push: function (memo) {
+                this.memos.unshift(memo);
             }
         }
     }

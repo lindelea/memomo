@@ -43,7 +43,7 @@ class MemoController extends Controller
         $this->validate($request, [
             'title' => 'required|string|min:1|max:50',
             'content' => 'required|string',
-            'image' => 'image',
+            'image' => 'nullable|image',
         ]);
         
         $memo = new Memo();
