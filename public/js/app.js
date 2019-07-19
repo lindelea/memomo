@@ -1915,6 +1915,11 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "CreateMemoModal",
@@ -1961,8 +1966,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   formData.append('image', image);
                 }
 
-                formData.append('title', this.form.title);
-                formData.append('content', this.form.content);
+                if (this.form.title) {
+                  formData.append('title', this.form.title);
+                }
+
+                if (this.form.content) {
+                  formData.append('content', this.form.content);
+                }
+
                 config = {
                   headers: {
                     'content-type': 'multipart/form-data'
@@ -2071,6 +2082,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
 //
 //
 //
@@ -41619,6 +41634,13 @@ var render = function() {
                   _c("label", { attrs: { for: "content" } }, [_vm._v("Image")]),
                   _vm._v(" "),
                   _c("croppa", {
+                    attrs: {
+                      width: 400,
+                      height: 400,
+                      placeholder: "画像ファイルを選択",
+                      "placeholder-color": "#fff",
+                      "placeholder-font-size": 16
+                    },
                     model: {
                       value: _vm.form.imagePicker,
                       callback: function($$v) {
@@ -41833,6 +41855,16 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("div", { staticClass: "modal-body" }, [
+                  _vm.memo.attributes.image_url
+                    ? _c("img", {
+                        staticClass: "card-img-top",
+                        attrs: {
+                          src: _vm.memo.attributes.image_url,
+                          alt: _vm.memo.attributes.title
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
                   _c("p", { staticClass: "text-secondary" }, [
                     _vm._v(
                       "\n                    Last updated " +

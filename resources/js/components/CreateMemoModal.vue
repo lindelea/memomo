@@ -19,7 +19,12 @@
                     </div>
                     <div class="form-group">
                         <label for="content">Image</label>
-                        <croppa v-model="form.imagePicker"></croppa>
+                        <croppa v-model="form.imagePicker"
+                                :width="400"
+                                :height="400"
+                                placeholder="画像ファイルを選択"
+                                placeholder-color="#fff"
+                                :placeholder-font-size="16"></croppa>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -57,11 +62,16 @@
             createButtonClicked: async function () {
                 let formData = new FormData();
                 let image = await this.form.imagePicker.promisedBlob('image/jpeg', 0.8);
+
                 if (image) {
                     formData.append('image', image);
                 }
-                formData.append('title', this.form.title);
-                formData.append('content', this.form.content);
+                if (this.form.title) {
+                    formData.append('title', this.form.title);
+                }
+                if (this.form.content) {
+                    formData.append('content', this.form.content);
+                }
 
                 let config = {
                     headers: {

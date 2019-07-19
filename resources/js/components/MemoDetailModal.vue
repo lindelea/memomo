@@ -9,6 +9,10 @@
                     </button>
                 </div>
                 <div class="modal-body">
+                    <img v-if="memo.attributes.image_url"
+                         :src="memo.attributes.image_url"
+                         class="card-img-top"
+                         :alt="memo.attributes.title">
                     <p class="text-secondary">
                         Last updated {{ memo.attributes.updated_at_for_human }}
                     </p>
