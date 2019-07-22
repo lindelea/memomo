@@ -64,6 +64,13 @@ class MemoController extends Controller
             ->setStatusCode(201);
     }
 
+    /**
+     * メモ更新API
+     * @param Request $request
+     * @param Memo $memo
+     * @return MemoResource
+     * @throws \Illuminate\Validation\ValidationException
+     */
     public function update(Request $request, Memo $memo)
     {
         $this->validate($request, [
